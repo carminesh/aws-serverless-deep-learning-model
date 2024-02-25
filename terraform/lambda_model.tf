@@ -61,8 +61,8 @@ data "archive_file" "zip_the_python_code" {
 }
 
 # Define the Lambda function resource
-resource "aws_lambda_function" "my_lambda_function" {
-  function_name = "my-lambda-function"                 # Name for the Lambda function
+resource "aws_lambda_function" "lambda-prediction-model" {
+  function_name = "lambda-prediction-model"            # Name for the Lambda function
   filename      = "../app/lambda-prediction-model.zip" # Path to the Lambda deployment package
   handler       = "model.lambda_handler"               # The name of the function handler
   runtime       = "python3.8"                          # Runtime  of the lambda function
