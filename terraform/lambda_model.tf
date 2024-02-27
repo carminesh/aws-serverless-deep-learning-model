@@ -63,11 +63,16 @@ data "archive_file" "zip_the_python_code" {
 # Define the Lambda function resource
 resource "aws_lambda_function" "lambda_prediction_model" {
 
-  function_name = "lambda_prediction_model"            # Name for the Lambda function
-  filename      = "../app/lambda_prediction_model.zip" # Path to the Lambda deployment package
-  handler       = "model.lambda_handler"               # The name of the function handler
-  runtime       = "python3.8"                          # Runtime  of the lambda function
-  role          = aws_iam_role.lambda_model_role.arn
+  function_name = "lambda_prediction_model" # Name for the Lambda function
+
+
+  image_uri    = "${aws_ecr_repository.lambda_model_repository.repository_url}:${local.image_version}"
+  package_type = "Image"
+
+  /* filename = "../app/lambda_prediction_model.zip" # Path to the Lambda deployment package
+  handler  = "model.lambda_handler"               # The name of the function handler
+  runtime = "python3.11" # Runtime  of the lambda function */
+  role = aws_iam_role.lambda_model_role.arn
 
   source_code_hash = data.archive_file.zip_the_python_code.output_base64sha256
 
