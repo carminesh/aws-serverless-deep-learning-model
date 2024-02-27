@@ -57,17 +57,19 @@ resource "aws_iam_role_policy_attachment" "lambda_model_policy_attachement" {
 data "archive_file" "zip_the_python_code" {
   type        = "zip"
   source_dir  = "../app/"
-  output_path = "../app/lambda-prediction-model.zip"
+  output_path = "../app/lambda_prediction_model.zip"
 }
 
 # Define the Lambda function resource
-resource "aws_lambda_function" "lambda-prediction-model" {
-  function_name = "lambda-prediction-model"            # Name for the Lambda function
-  filename      = "../app/lambda-prediction-model.zip" # Path to the Lambda deployment package
+resource "aws_lambda_function" "lambda_prediction_model" {
+
+  function_name = "lambda_prediction_model"            # Name for the Lambda function
+  filename      = "../app/lambda_prediction_model.zip" # Path to the Lambda deployment package
   handler       = "model.lambda_handler"               # The name of the function handler
   runtime       = "python3.8"                          # Runtime  of the lambda function
   role          = aws_iam_role.lambda_model_role.arn
 
+  source_code_hash = data.archive_file.zip_the_python_code.output_base64sha256
 
   environment {
     variables = {
