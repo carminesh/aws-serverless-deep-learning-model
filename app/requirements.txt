@@ -52,3 +52,4 @@ typing_extensions==4.9.0
 tzdata==2024.1
 Werkzeug==3.0.1
 wrapt==1.14.1
+h5py==3.10.0

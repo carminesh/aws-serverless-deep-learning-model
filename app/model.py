@@ -1,54 +1,93 @@
 import json
 import boto3
-
+import h5py
+import base64
+import io
+import re
+import numpy as np
+from PIL import Image
+from keras.models import load_model
+from keras.preprocessing import image
 
 def lambda_handler(event, context):
     
-    response_message = 'Hello, World!!!'
-      
-    if 'name' in event:
-        response_message = 'Hello, {}!'.format(event['name'])
-    
 
-    response = {
-        'statusCode': 200,
-        'headers': {
-            'Content-Type': 'application/json',
-        },
-        'body': json.dumps({'message': response_message})
-    }
-
-    return response
-
-    """ bucket_name = 'model-bucket-cloud-computing-project'
+    bucket_name = 'model-bucket-cloud-computing-project'
     object_key = 'wildfiremodel.h5'
     
-    s3_client = boto3.client('s3')
- 
     
     try:
-        result = client_s3.download_file("model-bucket-cloud-computing-project",'wildfiremodel.h5', "/tmp/model.h5")
-        model = load_model("/tmp/day/model.h5") 
+        s3_client = boto3.client('s3')
+        s3_client.download_file("model-bucket-cloud-computing-project", 'wildfiremodel.h5', "/tmp/model")
         
-        print(model)
+        with h5py.File('/tmp/model','r') as f:
+            model = load_model(f)
+            
+            
         
-        # Perform inference or other operations with the loaded model
-        # Example: result = model.predict(input_data)
-        # Replace the above line with code to use your loaded model
-        result = "Model loaded successfully"
+        image_data_base64 = event['content']
+        
+        image_data = re.sub('^data:image/.+;base64,', '', image_data_base64)
+    
+        # Decode Base64 image data back into its binary form
+        decoded_image = base64.b64decode(image_data)
+        
+        # Convert binary image data into an image object
+        img = Image.open(io.BytesIO(decoded_image)) 
+
+        # Preprocess the image
+        processed_img = preprocess_image(img)
+
+        # Perform prediction on the preprocessed image using the loaded model
+        prediction_result = predict_image(model, processed_img)
+        
+        
 
         return {
             'statusCode': 200,
-            'body': json.dumps({'result': result})
+            'body': json.dumps({'result': prediction_result})
         }
     except Exception as e:
         # Handle any errors
         return {
             'statusCode': 500,
             'body': json.dumps({'error': str(e)})
-        } """ 
+        } 
  
 
+def preprocess_image(img):
+    # Resize the image to match the input size of your model
+    img = img.resize((350, 350))
 
+    # Convert image to array and normalize pixel values
+    img_array = image.img_to_array(img)
+    img_array = img_array / 255.0  # Normalize pixel values between 0 and 1
 
+    # Expand dimensions to match the input shape expected by the model
+    img_array = np.expand_dims(img_array, axis=0)
+
+    return img_array
+
+def predict_image(model, processed_img):
+    # Perform prediction using the model
+    prediction = model.predict(processed_img)
     
+    # Convert NumPy array to Python list
+    prediction_list = prediction.tolist()
+    
+    # Determine wildfire or not wildfire based on threshold
+    threshold = 0.5
+    if prediction_list[0][0] >= threshold:
+        label = "wildfire"
+    else:
+        label = "not wildfire"
+
+
+    return label
+
+
+
+
+
+
+
