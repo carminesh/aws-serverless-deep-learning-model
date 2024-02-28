@@ -38,3 +38,5 @@ override.tf.json
 
 /app/Dockerfile
 /app/Makefile
+
+/frontend/wildfire-detector/node_modules
