@@ -20,3 +20,13 @@
   color: #333333;
 }
 
+#user-text {
+  font-size: calc(2px + 1.5vmin);
+}
+
+#logout-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: 'absolute'; 
+}

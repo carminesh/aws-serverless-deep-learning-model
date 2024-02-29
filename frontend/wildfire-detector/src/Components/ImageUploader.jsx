@@ -1,14 +1,34 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../Style/ImageUploader.css';
-import Button from '@mui/material/Button';
+import LoadingButton from '@mui/lab/LoadingButton';
 import PublishIcon from '@mui/icons-material/Publish';
 import FolderIcon from '@mui/icons-material/Folder';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
-const ImageUploader = () => {
+const ImageUploader = ({ accessToken }) => {
   const [imageBase64, setImageBase64] = useState('');
   const [imageFile, setImageFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
+
+  async function postData(imageBase) {      
+    try {
+          const response = await fetch('/mypath', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + accessToken,
+            'Origin': '*'
+          },
+          body: JSON.stringify({content: imageBase})
+         });
+         
+        const data = await response.json();
+        return data;
+    } catch(error) {
+        console.error('POST call failed:', error);
+    }
+  }
 
 
   const handleImageChange = (e) => {
@@ -23,8 +43,11 @@ const ImageUploader = () => {
     }
   };
 
-  const handleUpload = () => {
-    console.log('Image Base64:', imageBase64);
+  const handleUpload = async () => {
+    setLoading(true);
+    const result = await postData(imageBase64);
+    console.log("🚀 ~ handleUpload ~ result:", result)
+    setLoading(false);
   };
 
   const handleDrop = (e) => {
@@ -68,9 +91,16 @@ const ImageUploader = () => {
         </div>
       }
       {imageFile && (
-        <Button id="upload-btn" variant="outlined" startIcon={<PublishIcon />}>
+        <LoadingButton 
+            id="upload-btn" 
+            loading={loading}
+            loadingPosition="start" 
+            variant="outlined" 
+            startIcon={<PublishIcon />} 
+            onClick={handleUpload}
+        >
           Click to upload
-        </Button>
+        </LoadingButton>
       )}
 
     

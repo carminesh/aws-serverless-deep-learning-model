@@ -40,4 +40,6 @@ override.tf.json
 /app/Makefile
 
 
-node_modules
+/frontend/wildfire-detector/node_modules
+/frontend/wildfire-detector/.env
+
