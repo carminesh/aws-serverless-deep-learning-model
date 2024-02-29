@@ -4,7 +4,8 @@ import ImageUploader from './ImageUploader';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="Header">
+        <h2>Wildfire Prediction</h2>
       </header>
 
       <ImageUploader/>

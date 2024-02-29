@@ -1,0 +1,107 @@
+#box {
+    width: 30%;
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#upload-btn {
+    padding: 10px;
+    background-color: red !important;
+}
+
+.drop-container {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+  width: 350px;
+  padding: 20px;
+  border-radius: 14px;
+  border: 2.5px dashed #999999;
+  color: #999999;
+  transition: background .2s ease-in-out, border .2s ease-in-out;
+}
+
+
+/* entering the hover */
+
+.drop-container:hover {
+  cursor: pointer;
+  border-color: #333333;
+}
+
+.drop-container:hover #folder-container {
+  width: 100px;
+  height: 100px;
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+.drop-container #folder-container {
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+/* exiting the hover */
+.drop-container:hover #folder-icon {
+  width: 55px;
+  height: 55px;
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+.drop-container #folder-icon {
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+.drop-title {
+  color: #333333;
+  font-size: 16px;
+  text-align: center;
+  transition: color .2s ease-in-out;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #DFDFDF;
+}
+
+
+#file-input {
+    display: none;
+  }
+
+  #file-input-label {
+    font-weight: 600;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-items: center;
+    color: #666666;
+    font-size: 1.2em;
+    width: 200px;
+    padding: 10px 15px;
+    border: 2px solid #dfdfdf;
+    border-radius: 8px;
+  }
+
+  #file-input-label:hover {
+    border: 2px solid #333333;
+    background-color: #333333;
+    color: #DFDFDF;
+    cursor: pointer;
+    transition: background .2s ease-in-out, border .2s ease-in-out;
+  }
+
+  
+  #folder-container {
+    margin-bottom: 2px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #dfdfdf ;
+  }
+  
