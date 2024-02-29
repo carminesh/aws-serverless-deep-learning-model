@@ -6,11 +6,6 @@
     align-items: center;
 }
 
-#upload-btn {
-    padding: 10px;
-    background-color: red !important;
-}
-
 .drop-container {
   position: relative;
   display: flex;
@@ -21,15 +16,28 @@
   height: 350px;
   width: 350px;
   padding: 20px;
-  border-radius: 14px;
+  border-radius: 16px;
   border: 2.5px dashed #999999;
   color: #999999;
   transition: background .2s ease-in-out, border .2s ease-in-out;
 }
 
+.uploaded-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  height: 100%; 
+}
+
+.uploaded-image img {
+  width: 100%; 
+  height: 100%; 
+  border-radius: 14px;
+}
+
 
 /* entering the hover */
-
 .drop-container:hover {
   cursor: pointer;
   border-color: #333333;
@@ -105,3 +113,40 @@
     background-color: #dfdfdf ;
   }
   
+#upload-btn {
+  padding: 10px;
+  position: absolute;
+  top: 380px;
+  font-weight: 600;
+  margin-top: 10px;
+  color: #666666;
+  width: 200px;
+  padding: 10px 15px;
+  border: 2px solid #666666;
+  border-radius: 8px;
+}
+
+#upload-btn:hover {
+  border: 2px solid #333333;
+  background-color: #333333;
+  color: #DFDFDF;
+  cursor: pointer;
+  transition: background .2s ease-in-out, border .2s ease-in-out;
+}
+
+.remove-button {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  z-index: 1; /* Ensure the button appears above the image */
+  background-color: rgba(255, 255, 255, 1); /* Semi-transparent white background */
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  background-color: #333333;
+  color: #DFDFDF
+}
+
