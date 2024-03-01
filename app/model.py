@@ -39,7 +39,7 @@ def lambda_handler(event, context):
         processed_img = preprocess_image(img)
 
         # Perform prediction on the preprocessed image using the loaded model
-        prediction_result = predict_image(model, processed_img)
+        label, confidence = predict_image(model, processed_img)
         
         
 
@@ -50,10 +50,11 @@ def lambda_handler(event, context):
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
             },
-            'body': json.dumps({'result': prediction_result})
+            'body': json.dumps({'predicted_label': label, 'confidence': confidence})
         }
+        
     except Exception as e:
-        # Handle any errors
+        
         return {
             'statusCode': 500,
             'body': json.dumps({'error': str(e)})
@@ -73,22 +74,30 @@ def preprocess_image(img):
 
     return img_array
 
+
 def predict_image(model, processed_img):
+    
     # Perform prediction using the model
     prediction = model.predict(processed_img)
     
     # Convert NumPy array to Python list
-    prediction_list = prediction.tolist()
+    # prediction_list = prediction.tolist()
+    
+    # Assuming the prediction is a probability of being 'wildfire'
+    wildfire_probability = prediction[0][0]
     
     # Determine wildfire or not wildfire based on threshold
     threshold = 0.5
-    if prediction_list[0][0] >= threshold:
+    
+    if wildfire_probability >= threshold:
         label = "wildfire"
+        confidence = "{:.2f}%".format(wildfire_probability * 100)
     else:
         label = "not wildfire"
+        confidence = "{:.2f}%".format((1 - wildfire_probability) * 100)
 
 
-    return label
+    return label, confidence
 
 
 
