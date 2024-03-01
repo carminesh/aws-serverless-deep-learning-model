@@ -5,7 +5,7 @@ import PublishIcon from '@mui/icons-material/Publish';
 import FolderIcon from '@mui/icons-material/Folder';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
-const ImageUploader = ({ accessToken }) => {
+const ImageUploader = ({ accessToken, setPredictionResult }) => {
   const [imageBase64, setImageBase64] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ const ImageUploader = ({ accessToken }) => {
 
   async function postData(imageBase) {      
     try {
-          const response = await fetch('/mypath', {
+          const response = await fetch('/predictWildfire', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ const ImageUploader = ({ accessToken }) => {
          });
          
         const data = await response.json();
-        return data;
+        return data.body;
     } catch(error) {
         console.error('POST call failed:', error);
     }
@@ -45,8 +45,9 @@ const ImageUploader = ({ accessToken }) => {
 
   const handleUpload = async () => {
     setLoading(true);
-    const result = await postData(imageBase64);
-    console.log("🚀 ~ handleUpload ~ result:", result)
+    const predictionResults = JSON.parse(await postData(imageBase64));
+    console.log("🚀 ~ handleUpload ~ predictionResults:", predictionResults)
+    setPredictionResult(predictionResults)
     setLoading(false);
   };
 
@@ -70,6 +71,7 @@ const ImageUploader = ({ accessToken }) => {
   const handleRemoveImage = () => {
     setImageBase64('');
     setImageFile(null);
+    setPredictionResult(null);
   };
 
 
@@ -79,10 +81,10 @@ const ImageUploader = ({ accessToken }) => {
       <div id="folder-container">
         <FolderIcon id="folder-icon" sx={{color: "#666666", width: '70px', height: '70px'}} />
       </div>
-      <span class="drop-title">Drop your files here</span>
+      <span className="drop-title">Drop your files here</span>
 
       <input type="file" id="file-input" name="file-input" onChange={handleImageChange} accept="image/*"/>
-      <label id="file-input-label" for="file-input">Select a File</label>
+      <label id="file-input-label" htmlFor="file-input">Select a File</label>
 
       {imageBase64 && 
         <div className="uploaded-image">

@@ -7,26 +7,75 @@
   height: 100vh; 
   width: 100%;
 }
+
 .Header {
   position: absolute;
   min-height: 8vh;
   width: 100%;
   top: 0pt;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: #333333;
 }
 
+.AppBody {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
 #user-text {
+  position: absolute;
+  top: 140px;
   font-size: calc(2px + 1.5vmin);
 }
 
-#logout-btn {
+
+#result-div {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: 'absolute'; 
+  flex-direction: column;
+  position: absolute;
+  bottom: 15vh;
+}
+
+#logout-icon {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+
+@media (max-width: 600px) {
+  .Header {
+    font-size: 1.2rem;
+  }
+
+  #logout-btn {
+    top: 29px;
+    right: 5px;
+  }
+
+  #user-text {
+    position: absolute;
+    top: 140px;
+    font-size: 1rem;
+  }
+
+  #logout-icon {
+    width: 25px !important;
+    height: 25px !important;
+  }
+
+  #result-div {
+    bottom: 7vh;
+  }
+
+  
 }
