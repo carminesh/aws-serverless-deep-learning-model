@@ -19,7 +19,7 @@ The system architecture comprises various AWS services, including:
 
 The overall infrastructure is defined using Terraform, enabling Infrastructure as Code (IaC) practices for reproducible and scalable deployments.
 
-![Wildfire Prediction](aws_architecture.svg)
+![Project Architecture](images/aws_architecture.svg)
 
 
 
