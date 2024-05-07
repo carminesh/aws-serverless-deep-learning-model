@@ -1,7 +1,7 @@
 # Serverless Wildfire Convolutional Neural Network Prediction Model on AWS Deployed with Terraform
 
 ## Overview
-The Wildfire Prediction System is a cloud-based application designed to predict wildfires from satellite images using a custom Convolutional Neural Network (CNN). Leveraging AWS serverless infrastructure through the use of Terraform and modern web technologies, the system provides users with an intuitive interface for uploading images, triggering predictions, and viewing results in real-time.
+The Wildfire Prediction System is a cloud-based application designed to predict wildfires from satellite images using a custom Convolutional Neural Network (CNN). Leveraging AWS serverless infrastructure through the use of Terraform and modern web technologies, the system provides users with an intuitive interface for uploading images, triggering predictions, and viewing results in real time.
 
 ## Features
 - User authentication using AWS Cognito for secure access to the system.
@@ -12,14 +12,14 @@ The Wildfire Prediction System is a cloud-based application designed to predict 
 
 ## Architecture
 The system architecture comprises various AWS services, including:
-- AWS Lambda for serverless compute.
+- AWS Lambda for serverless computing.
 - AWS S3 for storing the CNN Model.
 - AWS ECR for storing and managing the Docker image of the Lambda function.
 - AWS Cognito for user authentication and access control.
 
 The overall infrastructure is defined using Terraform, enabling Infrastructure as Code (IaC) practices for reproducible and scalable deployments.
 
-![Project Architecture](images/aws_infrastructure.pdf)
+![Project Architecture](images/aws_infrastructure.svg)
 
 
 
