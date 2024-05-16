@@ -19,7 +19,7 @@ resource "aws_cognito_user_pool_client" "client" {
 
 resource "aws_cognito_user" "test_user" {
   user_pool_id = aws_cognito_user_pool.pool.id
-  username     = "Carmin3_fa"
-  password     = "Progetto_uni123"
+  username     = "test_user"
+  password     = "Project_test123"
 }
 
