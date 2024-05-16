@@ -14,7 +14,11 @@ function App() {
   const [predictionResult, setPredictionResult] = useState();
 
 
-  
+  useEffect(() => {
+     console.log('predictionResult: ', predictionResult)
+  }, [predictionResult])
+
+
 
   async function currentSession() {
     try {
@@ -29,12 +33,7 @@ function App() {
       currentSession()
   }, [])
 
-  useEffect(() => {
-    if(userToken) {
-      //postData(userToken)
-    }
-  }, [userToken])
-
+  
 
    
   return(

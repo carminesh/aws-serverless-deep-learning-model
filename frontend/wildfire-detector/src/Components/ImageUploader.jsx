@@ -46,7 +46,7 @@ const ImageUploader = ({ accessToken, setPredictionResult }) => {
   const handleUpload = async () => {
     setLoading(true);
     const predictionResults = JSON.parse(await postData(imageBase64));
-    console.log("🚀 ~ handleUpload ~ predictionResults:", predictionResults)
+  
     setPredictionResult(predictionResults)
     setLoading(false);
   };
