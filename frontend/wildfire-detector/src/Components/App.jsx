@@ -23,7 +23,7 @@ function App() {
   async function currentSession() {
     try {
       const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
-      console.log('ID TOKEN : ', idToken);
+      console.log('ID TOKEN : ', idToken.toString());
       setUserToken(idToken.toString())
     } catch (err) {
       console.log(err);
