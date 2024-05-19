@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState  } from 'react';
 import '../Style/ImageUploader.css';
 import LoadingButton from '@mui/lab/LoadingButton';
 import PublishIcon from '@mui/icons-material/Publish';
@@ -46,7 +46,7 @@ const ImageUploader = ({ accessToken, setPredictionResult }) => {
   const handleUpload = async () => {
     setLoading(true);
     const predictionResults = JSON.parse(await postData(imageBase64));
-  
+
     setPredictionResult(predictionResults)
     setLoading(false);
   };

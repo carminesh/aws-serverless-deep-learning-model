@@ -23,6 +23,7 @@ function App() {
   async function currentSession() {
     try {
       const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
+      console.log('ID TOKEN : ', idToken);
       setUserToken(idToken.toString())
     } catch (err) {
       console.log(err);
@@ -50,8 +51,7 @@ function App() {
                 <ImageUploader id="uploader-div" accessToken={userToken} setPredictionResult={setPredictionResult}/> {/* I should store the token within Redux, but for this simple app i would not */}
                 { predictionResult && 
                 <div id="result-div">
-                  <p>Predicted image: {predictionResult.predicted_label}</p>
-                  <p>Prediction confidence: {predictionResult.confidence}</p>
+                  <p>Predicted image: {predictionResult.predicted_label}</p>{/* <p>Prediction confidence: {predictionResult.confidence}</p> */}
                 </div>
                 }
               </div>
