@@ -45,7 +45,7 @@ def lambda_handler(event, context):
 
         return {
             'statusCode': 200,
-            'body': json.dumps({'result': prediction_result})
+            'body': json.dumps(prediction_result)
         }
     except Exception as e:
         # Handle any errors
@@ -75,6 +75,9 @@ def predict_image(model, processed_img):
     # Convert NumPy array to Python list
     prediction_list = prediction.tolist()
     
+    # Calculate confidence
+    confidence = prediction_list[0][0] * 100  # Convert probability to percentage
+    
     # Determine wildfire or not wildfire based on threshold
     threshold = 0.5
     if prediction_list[0][0] >= threshold:
@@ -82,12 +85,4 @@ def predict_image(model, processed_img):
     else:
         label = "not wildfire"
 
-
-    return label
-
-
-
-
-
-
-
+    return {'predicted_label': label, 'confidence': f'{confidence:.2f}%'}
