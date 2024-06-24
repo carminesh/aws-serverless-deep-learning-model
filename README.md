@@ -3,6 +3,9 @@
 ## Overview
 The Wildfire Prediction System is a cloud-based application designed to predict wildfires from satellite images using a custom Convolutional Neural Network (CNN). Leveraging AWS serverless infrastructure through the use of Terraform and modern web technologies, the system provides users with an intuitive interface for uploading images, triggering predictions, and viewing results in real time.
 
+[Here](report/Cloud_Computing_Project_Report.pdf) you can find the complete report for the project. 
+
+
 ## Features
 - User authentication using AWS Cognito for secure access to the system.
 - Image upload functionality via drag-and-drop or file selector.
