@@ -8,6 +8,16 @@
   width: 100%;
 }
 
+
+.AppContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+
 .Header {
   position: absolute;
   min-height: 8vh;
@@ -43,7 +53,7 @@
   align-items: center;
   flex-direction: column;
   position: absolute;
-  bottom: 15vh;
+  bottom: 5vh;
 }
 
 #logout-icon {
@@ -79,3 +89,4 @@
 
   
 }
+

@@ -23,8 +23,13 @@ const ImageUploader = ({ accessToken, setPredictionResult }) => {
           body: JSON.stringify({content: imageBase})
          });
          
-        const data = await response.json();
-        return data.body;
+        if(response !== 'undefined') {
+          const data = await response.json();
+          return data.body;
+        }
+
+        return null;
+        
     } catch(error) {
         console.error('POST call failed:', error);
     }
@@ -49,6 +54,7 @@ const ImageUploader = ({ accessToken, setPredictionResult }) => {
 
     setPredictionResult(predictionResults)
     setLoading(false);
+    
   };
 
   const handleDrop = (e) => {

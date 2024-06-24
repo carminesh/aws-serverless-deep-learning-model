@@ -12,7 +12,7 @@
 
 
 1. Una volta lanciata l'app, è necessario sostituire nel file frontend/wildfire-detector/.env
-le variabili REACT_APP_USER_POOL_ID e REACT_APP_USER_POOL_APP_CLIENT_ID.
+le variabili REACT_APP_USER_POOL_ID (id bacino utenza) e REACT_APP_USER_POOL_APP_CLIENT_ID.
 
 Per ottenere USER_POOL_APP_CLIENT_ID, lanciare il seugente comando nel terminale (loggato con aws):
     aws cognito-idp list-user-pool-clients --user-pool-id {POOL-ID} --max-results 3
