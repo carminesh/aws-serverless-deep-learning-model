@@ -47,22 +47,19 @@ To get started with the Wildfire Prediction System, follow these steps:
    npm start
    ```
 
-5. Access the application in your browser at `http://localhost:3000`.
+5. Access the application in your browser.
 
-
-## Future Work
-While the current version of the Wildfire Prediction System is functional, there are several areas for future improvement:
-- Enhance the prediction model for higher accuracy and reliability.
-- Integrate real-time monitoring capabilities using live satellite imagery and sensor data.
-- Foster community engagement through interactive features and educational resources.
-- Optimize scalability, resilience, and cost-efficiency of the AWS infrastructure.
-
-
-
+## Initialize the infrastructure through Terraform
 1. cd terraform
 2. terraform apply -target=aws_ecr_repository.lambda_model_repository
 3. cd .. && cd app
-4. make docker/push (open Docker)
+4. make docker/push (ensure that Docker is already running)
 5. cd .. && cd terraform
 6. terraform apply
-   
+
+## Future Work
+While the current version of the Wildfire Prediction System is functional, there are several areas for future improvement:
+- Integrate real-time monitoring capabilities using live satellite imagery and sensor data.
+- Optimize  cost-efficiency of the AWS infrastructure.
+- Create a CI/CD pipeline
+
